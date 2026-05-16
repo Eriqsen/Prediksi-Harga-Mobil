@@ -1,0 +1,58 @@
+{
+  "features": [
+    "__year_resale_value",
+    "Engine_size",
+    "Horsepower",
+    "Curb_weight",
+    "Wheelbase",
+    "Fuel_capacity",
+    "Power_perf_factor"
+  ],
+  "target": "Price_in_thousands",
+  "rmse": 0.0,
+  "r2": 1.0,
+  "feature_stats": {
+    "__year_resale_value": {
+      "min": 5.16,
+      "max": 67.55,
+      "mean": 17.119,
+      "median": 14.01
+    },
+    "Engine_size": {
+      "min": 1.0,
+      "max": 8.0,
+      "mean": 3.06,
+      "median": 3.0
+    },
+    "Horsepower": {
+      "min": 55.0,
+      "max": 450.0,
+      "mean": 185.697,
+      "median": 175.0
+    },
+    "Curb_weight": {
+      "min": 1.895,
+      "max": 5.572,
+      "mean": 3.377,
+      "median": 3.341
+    },
+    "Wheelbase": {
+      "min": 92.6,
+      "max": 138.7,
+      "mean": 107.491,
+      "median": 107.0
+    },
+    "Fuel_capacity": {
+      "min": 10.3,
+      "max": 32.0,
+      "mean": 17.957,
+      "median": 17.2
+    },
+    "Power_perf_factor": {
+      "min": 23.276,
+      "max": 188.144,
+      "mean": 77.044,
+      "median": 72.031
+    }
+  }
+}
