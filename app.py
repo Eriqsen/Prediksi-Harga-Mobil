@@ -386,7 +386,6 @@ with col_r:
                 <div class="cr-left">SISTEM INI<br>DIBUAT OLEH</div>
                 <div>
                     <div class="cr-name">Alariq Aria Mustafa</div>
-                    <div class="cr-nim">NIM · 237006166</div>
                 </div>
             </div>
         </div>""", unsafe_allow_html=True)
