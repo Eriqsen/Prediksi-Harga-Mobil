@@ -214,6 +214,5 @@ with right:
         '>
             <span style='color:#44446a;font-size:0.78rem'>SISTEM INI DIBUAT OLEH: &nbsp;</span>
             <span style='color:#8080c0;font-weight:600'>Alariq Aria Mustafa &nbsp;·&nbsp; </span>
-            <span style='color:#44446a'>NIM 237006166</span>
         </div>
         """, unsafe_allow_html=True)
