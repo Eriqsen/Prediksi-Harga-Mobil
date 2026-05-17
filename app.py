@@ -13,248 +13,202 @@ st.set_page_config(
 )
 
 st.markdown("""
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
-*, *::before, *::after { box-sizing: border-box; }
 
-html, body, .stApp {
-    background: #080810 !important;
-    font-family: 'DM Sans', sans-serif;
-    color: #e0e0f0;
-}
-
+/* ══ RESET & BASE ══ */
+html, body, .stApp { background: #0e0e16 !important; font-family: 'Outfit', sans-serif; }
 #MainMenu, footer, header, .stDeployButton { display: none !important; }
-.block-container { padding: 0 !important; max-width: 100% !important; }
+.block-container { padding: 2rem 2.5rem 4rem !important; max-width: 1400px !important; }
 section[data-testid="stSidebar"] { display: none !important; }
-[data-testid="stAppViewContainer"] { padding: 0; }
 
-/* ─── HERO ─── */
-.hero {
+/* ══ HERO BANNER ══ */
+.hero-wrap {
+    background: linear-gradient(120deg, #12122a 0%, #1a0a00 50%, #0e0e16 100%);
+    border: 1px solid #2a2a45;
+    border-radius: 16px;
+    padding: 44px 52px;
+    margin-bottom: 32px;
     position: relative;
     overflow: hidden;
-    padding: 52px 64px 40px;
-    background: #080810;
-    border-bottom: 1px solid #141428;
 }
-.hero-glow-a {
-    position: absolute; top: -100px; right: -40px;
-    width: 480px; height: 480px;
-    background: radial-gradient(circle, rgba(255,55,0,0.16) 0%, transparent 68%);
-    pointer-events: none;
+.hero-wrap::before {
+    content:''; position:absolute; top:-80px; right:-60px;
+    width:350px; height:350px;
+    background: radial-gradient(circle, rgba(255,80,0,0.22) 0%, transparent 65%);
 }
-.hero-glow-b {
-    position: absolute; bottom: -120px; left: 25%;
-    width: 360px; height: 360px;
-    background: radial-gradient(circle, rgba(255,150,0,0.08) 0%, transparent 68%);
-    pointer-events: none;
+.hero-wrap::after {
+    content:''; position:absolute; bottom:-60px; left:35%;
+    width:280px; height:280px;
+    background: radial-gradient(circle, rgba(255,160,0,0.10) 0%, transparent 65%);
 }
-.hero-tag {
-    display: inline-flex; align-items: center; gap: 8px;
-    background: rgba(255,55,0,0.1);
-    border: 1px solid rgba(255,55,0,0.35);
-    color: #ff5522;
-    font-family: 'Space Mono', monospace;
-    font-size: 0.62rem; letter-spacing: 3px; text-transform: uppercase;
-    padding: 5px 14px; border-radius: 2px; margin-bottom: 20px;
+.hero-badge {
+    display:inline-flex; align-items:center; gap:8px;
+    background: rgba(255,80,0,0.15); border: 1px solid rgba(255,80,0,0.4);
+    color:#ff6633; font-family:'Space Mono',monospace;
+    font-size:0.62rem; letter-spacing:3px; text-transform:uppercase;
+    padding:5px 14px; border-radius:3px; margin-bottom:16px;
 }
-.hero-dot { width: 6px; height: 6px; border-radius: 50%; background: #ff5522; animation: blink 1.4s infinite; }
-@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+.live-dot { width:7px; height:7px; border-radius:50%; background:#ff5500; animation: pulse 1.3s infinite; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.3;transform:scale(0.8)} }
 
-.hero h1 {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(3.8rem, 7.5vw, 7rem);
-    letter-spacing: 4px; line-height: 0.88;
-    color: #ffffff; margin-bottom: 20px;
+.hero-title {
+    font-family:'Bebas Neue',sans-serif;
+    font-size: clamp(3.2rem,6vw,5.8rem);
+    letter-spacing:4px; line-height:0.9; color:#fff; margin-bottom:14px;
 }
-.hero h1 .accent { color: #ff4400; }
-.hero p { font-size: 0.95rem; color: #60608a; max-width: 460px; line-height: 1.7; font-weight: 300; }
+.hero-title .fire { color:#ff4400; }
+.hero-desc { font-size:0.95rem; color:#7878a8; max-width:500px; line-height:1.7; font-weight:300; margin-bottom:28px; }
+.kpi-row { display:flex; gap:48px; flex-wrap:wrap; }
+.kpi-item .val { font-family:'Bebas Neue',sans-serif; font-size:2rem; color:#ff5500; letter-spacing:2px; }
+.kpi-item .lbl { font-family:'Space Mono',monospace; font-size:0.58rem; color:#44446a; letter-spacing:2px; text-transform:uppercase; margin-top:2px; }
 
-.hero-kpi { display: flex; gap: 48px; margin-top: 32px; }
-.kpi-val { font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem; color: #ff4400; letter-spacing: 2px; }
-.kpi-lbl { font-family: 'Space Mono', monospace; font-size: 0.6rem; color: #40405a; letter-spacing: 2px; text-transform: uppercase; margin-top: 3px; }
+/* ══ PANEL HEADERS ══ */
+.panel-head {
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #1e1e38;
+}
+.panel-tag { font-family:'Space Mono',monospace; font-size:0.6rem; letter-spacing:4px; text-transform:uppercase; color:#ff4400; margin-bottom:8px; }
+.panel-title { font-family:'Bebas Neue',sans-serif; font-size:1.8rem; letter-spacing:3px; color:#ffffff; line-height:1; }
 
-/* ─── COLUMNS LAYOUT ─── */
-.col-left {
-    padding: 44px 52px;
-    background: #0b0b18;
-    border-right: 1px solid #141428;
-    min-height: calc(100vh - 230px);
-}
-.col-right {
-    padding: 44px 52px;
-    background: #070710;
-    min-height: calc(100vh - 230px);
-    display: flex; flex-direction: column;
-}
-
-.section-tag {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.6rem; letter-spacing: 4px; text-transform: uppercase;
-    color: #ff4400; margin-bottom: 10px;
-}
-.section-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 2rem; letter-spacing: 3px; color: #fff;
-    line-height: 1; margin-bottom: 36px;
-}
-
-/* ─── SPEC CARDS ─── */
-.spec-card {
-    background: rgba(255,255,255,0.022);
-    border: 1px solid rgba(255,255,255,0.055);
-    border-left: 3px solid transparent;
-    border-radius: 8px;
-    padding: 18px 20px 10px;
-    margin-bottom: 14px;
-    transition: border-color 0.2s, background 0.2s;
-}
-.spec-card:hover {
-    border-left-color: #ff4400;
-    background: rgba(255,68,0,0.04);
-}
-.spec-top {
-    display: flex; justify-content: space-between; align-items: center;
+/* ══ SPEC SLIDERS ══ */
+.spec-wrap {
+    background: #161625;
+    border: 1px solid #252540;
+    border-left: 3px solid #1e1e38;
+    border-radius: 10px;
+    padding: 16px 20px 4px;
     margin-bottom: 12px;
+    transition: border-left-color 0.2s;
 }
-.spec-name {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.62rem; letter-spacing: 2px; text-transform: uppercase;
-    color: #9090b8;
+.spec-wrap:hover { border-left-color: #ff4400; }
+.spec-label-row {
+    display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;
 }
-.spec-badge {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.58rem; color: #30305a;
-    background: rgba(255,255,255,0.03);
-    padding: 2px 8px; border-radius: 2px;
+.spec-name-txt {
+    font-family:'Space Mono',monospace; font-size:0.62rem;
+    letter-spacing:2px; text-transform:uppercase; color:#a0a0cc;
 }
-
-/* Slider overrides */
-div[data-testid="stSlider"] { padding: 0 !important; margin-bottom: 4px !important; }
-div[data-testid="stSlider"] > label { display: none !important; }
-div[data-testid="stSlider"] div[role="slider"] {
-    background: #ff4400 !important;
-    border: 2px solid #ff4400 !important;
-    box-shadow: 0 0 12px rgba(255,68,0,0.5) !important;
-}
-div[data-testid="stSlider"] > div > div > div:nth-child(1) {
-    background: rgba(255,68,0,0.2) !important;
+.spec-unit-txt {
+    font-family:'Space Mono',monospace; font-size:0.58rem;
+    color:#44446a; background:#0e0e1e; padding:2px 8px; border-radius:3px;
 }
 
-/* ─── BUTTON ─── */
+/* Streamlit slider styling */
+div[data-testid="stSlider"] { padding:0 !important; }
+div[data-testid="stSlider"] label { display:none !important; }
+div[data-testid="stSlider"] [role="slider"] {
+    background:#ff4400 !important;
+    border:2px solid #ff6633 !important;
+    box-shadow: 0 0 14px rgba(255,68,0,0.6) !important;
+}
+
+/* ══ BUTTON ══ */
 .stButton > button {
-    width: 100% !important;
-    background: linear-gradient(135deg, #cc3300 0%, #ff5500 50%, #ff7700 100%) !important;
-    color: #fff !important;
-    border: none !important;
-    border-radius: 6px !important;
-    padding: 18px !important;
-    font-family: 'Bebas Neue', sans-serif !important;
-    font-size: 1.3rem !important;
-    letter-spacing: 5px !important;
-    cursor: pointer !important;
-    box-shadow: 0 6px 28px rgba(255,68,0,0.4) !important;
-    transition: all 0.25s !important;
-    margin-top: 16px !important;
+    width:100% !important;
+    background: linear-gradient(135deg, #c43000 0%, #ff5500 55%, #ff8800 100%) !important;
+    color:#fff !important; border:none !important;
+    border-radius:10px !important; padding:17px !important;
+    font-family:'Bebas Neue',sans-serif !important;
+    font-size:1.25rem !important; letter-spacing:5px !important;
+    box-shadow: 0 8px 32px rgba(255,68,0,0.45) !important;
+    transition: all 0.25s !important; margin-top:12px !important;
 }
 .stButton > button:hover {
     transform: translateY(-2px) !important;
-    box-shadow: 0 12px 36px rgba(255,68,0,0.55) !important;
+    box-shadow: 0 14px 40px rgba(255,68,0,0.6) !important;
 }
 
-/* ─── PRICE CARD ─── */
-.price-card {
-    background: linear-gradient(145deg, #180800, #250f00, #180800);
-    border: 1px solid rgba(255,68,0,0.25);
-    border-radius: 12px;
-    padding: 36px 40px;
-    margin-bottom: 20px;
-    position: relative;
-    overflow: hidden;
-}
-.price-card::before {
-    content:'';
-    position: absolute; top: -80px; right: -80px;
-    width: 220px; height: 220px;
-    background: radial-gradient(circle, rgba(255,80,0,0.18) 0%, transparent 70%);
-}
-.pc-tag { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 4px; text-transform: uppercase; color: #ff4400; margin-bottom: 16px; }
-.pc-price {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(3rem, 5.5vw, 4.8rem);
-    letter-spacing: 2px; color: #fff; line-height: 1;
-}
-.pc-idr { font-size: 0.85rem; color: #40405a; margin-top: 8px; font-weight: 300; }
-.pc-range {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.65rem; color: #40405a; margin-top: 14px;
-}
-.pc-range b { color: #ff6030; }
-
-/* ─── ACCURACY BAR ─── */
-.acc-wrap {
-    background: rgba(255,255,255,0.025);
-    border: 1px solid rgba(255,255,255,0.055);
-    border-radius: 8px;
-    padding: 16px 20px;
+/* ══ RESULT PRICE CARD ══ */
+.price-big-card {
+    background: linear-gradient(145deg, #200e00, #2d1200, #1e0c00);
+    border: 1px solid rgba(255,80,0,0.3);
+    border-radius: 14px;
+    padding: 34px 38px;
     margin-bottom: 16px;
+    position:relative; overflow:hidden;
 }
-.acc-top { display: flex; justify-content: space-between; margin-bottom: 10px; }
-.acc-lbl { font-family: 'Space Mono', monospace; font-size: 0.6rem; color: #30304a; letter-spacing: 2px; text-transform: uppercase; }
-.acc-val { font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; color: #ff4400; letter-spacing: 1px; }
-.acc-bg { height: 3px; background: rgba(255,255,255,0.05); border-radius: 2px; }
-.acc-fill { height: 3px; border-radius: 2px; background: linear-gradient(90deg, #ff3300, #ffaa00); }
-
-/* ─── SPEC RESULT GRID ─── */
-.res-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 16px; }
-.res-item {
-    background: rgba(255,255,255,0.02);
-    border: 1px solid rgba(255,255,255,0.05);
-    border-radius: 6px;
-    padding: 12px 14px;
+.price-big-card::before {
+    content:''; position:absolute; top:-70px; right:-70px;
+    width:200px; height:200px;
+    background:radial-gradient(circle,rgba(255,90,0,0.2) 0%,transparent 70%);
 }
-.res-lbl { font-family: 'Space Mono', monospace; font-size: 0.55rem; color: #30304a; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 5px; }
-.res-val { font-size: 0.92rem; font-weight: 600; color: #c0c0e0; }
-.res-val small { font-size: 0.68rem; color: #40405a; margin-left: 3px; font-weight: 400; }
+.pbc-label { font-family:'Space Mono',monospace; font-size:0.6rem; letter-spacing:4px; text-transform:uppercase; color:#ff5500; margin-bottom:14px; }
+.pbc-usd { font-family:'Bebas Neue',sans-serif; font-size:clamp(2.8rem,5vw,4.5rem); letter-spacing:2px; color:#ffffff; line-height:1; }
+.pbc-idr { font-size:0.85rem; color:#5a5a80; margin-top:8px; font-weight:300; }
+.pbc-range { font-family:'Space Mono',monospace; font-size:0.63rem; color:#44446a; margin-top:14px; }
+.pbc-range b { color:#ff6030; font-weight:700; }
 
-/* ─── CREDIT ─── */
-.credit {
-    margin-top: auto;
-    background: rgba(255,255,255,0.015);
-    border: 1px solid rgba(255,255,255,0.04);
-    border-radius: 8px;
-    padding: 14px 20px;
-    display: flex; justify-content: space-between; align-items: center;
+/* ══ ACCURACY BAR ══ */
+.acc-card {
+    background:#161625; border:1px solid #252540;
+    border-radius:10px; padding:16px 20px; margin-bottom:14px;
 }
-.cr-left { font-family: 'Space Mono', monospace; font-size: 0.55rem; color: #20203a; letter-spacing: 2px; text-transform: uppercase; line-height: 1.8; }
-.cr-name { font-size: 0.88rem; color: #40406a; font-weight: 500; }
-.cr-nim { font-family: 'Space Mono', monospace; font-size: 0.62rem; color: #25253a; margin-top: 2px; }
+.acc-row { display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; }
+.acc-label-txt { font-family:'Space Mono',monospace; font-size:0.6rem; color:#44446a; letter-spacing:2px; text-transform:uppercase; }
+.acc-pct { font-family:'Bebas Neue',sans-serif; font-size:1.3rem; color:#ff5500; letter-spacing:1px; }
+.acc-track { height:4px; background:rgba(255,255,255,0.06); border-radius:2px; overflow:hidden; }
+.acc-bar { height:4px; border-radius:2px; background:linear-gradient(90deg,#ff3300,#ffaa00); transition:width 0.6s ease; }
 
-/* ─── IDLE ─── */
-.idle {
-    flex: 1; display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    text-align: center; padding: 40px 0;
+/* ══ SPEC RESULT GRID ══ */
+.res-cards {
+    display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:16px;
+}
+.res-card {
+    background:#161625; border:1px solid #252540;
+    border-radius:8px; padding:14px 16px;
+}
+.res-card-lbl { font-family:'Space Mono',monospace; font-size:0.55rem; color:#35355a; letter-spacing:2px; text-transform:uppercase; margin-bottom:6px; }
+.res-card-val { font-size:1rem; font-weight:600; color:#d0d0f8; }
+.res-card-val small { font-size:0.68rem; color:#44446a; margin-left:4px; font-weight:400; }
+
+/* ══ CREDIT CARD ══ */
+.credit-card {
+    background:#111120; border:1px solid #1e1e35;
+    border-radius:10px; padding:16px 22px;
+    display:flex; justify-content:space-between; align-items:center;
+    margin-top:8px;
+}
+.credit-label { font-family:'Space Mono',monospace; font-size:0.56rem; color:#28283a; letter-spacing:2px; text-transform:uppercase; line-height:1.9; }
+.credit-name { font-size:0.9rem; color:#6060a0; font-weight:600; text-align:right; }
+.credit-nim { font-family:'Space Mono',monospace; font-size:0.62rem; color:#28283a; text-align:right; margin-top:2px; }
+
+/* ══ IDLE STATE ══ */
+.idle-container {
+    display:flex; flex-direction:column; align-items:center;
+    justify-content:center; padding:60px 0; text-align:center;
 }
 .idle-ring {
-    width: 100px; height: 100px; border-radius: 50%;
-    border: 2px solid #141428;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 2.5rem; margin-bottom: 24px;
-    background: rgba(255,68,0,0.04);
-    box-shadow: 0 0 40px rgba(255,68,0,0.08);
+    width:110px; height:110px; border-radius:50%;
+    border:2px solid #1e1e38;
+    background:rgba(255,68,0,0.05);
+    box-shadow:0 0 50px rgba(255,68,0,0.07);
+    display:flex; align-items:center; justify-content:center;
+    font-size:2.8rem; margin-bottom:22px;
 }
-.idle-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; letter-spacing: 4px; color: #20203a; margin-bottom: 8px; }
-.idle-sub { font-size: 0.78rem; color: #18182a; line-height: 1.7; }
+.idle-title { font-family:'Bebas Neue',sans-serif; font-size:1.6rem; letter-spacing:4px; color:#25253a; margin-bottom:10px; }
+.idle-sub { font-size:0.8rem; color:#1c1c2e; line-height:1.8; }
+
+/* ══ METRIC OVERRIDES ══ */
+[data-testid="stMetric"] {
+    background:#161625 !important; border:1px solid #252540 !important;
+    border-radius:10px !important; padding:16px 20px !important;
+}
+[data-testid="stMetricLabel"] { color:#44446a !important; font-family:'Space Mono',monospace !important; font-size:0.6rem !important; }
+[data-testid="stMetricValue"] { color:#ffffff !important; font-family:'Bebas Neue',sans-serif !important; font-size:1.8rem !important; letter-spacing:2px !important; }
+
+/* Divider */
+hr { border-color:#1e1e38 !important; margin: 8px 0 20px !important; }
 </style>
 """, unsafe_allow_html=True)
 
 
-# ── LOAD MODEL
+# ── LOAD MODEL ────────────────────────────────────────────────
 @st.cache_resource
 def load_model():
     if not os.path.exists("model_prediksi_harga_mobil.pkl"):
-        st.error("❌ model_prediksi_harga_mobil.pkl tidak ditemukan. Jalankan notebook Colab dulu!")
+        st.error("❌ **model_prediksi_harga_mobil.pkl** tidak ditemukan!\n\nJalankan notebook Colab terlebih dahulu lalu download file model-nya.")
         st.stop()
     with open("model_prediksi_harga_mobil.pkl", "rb") as f:
         model = pickle.load(f)
@@ -268,124 +222,167 @@ STATS    = meta["feature_stats"]
 R2       = meta["r2"]
 RMSE     = meta["rmse"]
 
-# ── HERO
+# ── HERO ─────────────────────────────────────────────────────
 st.markdown(f"""
-<div class="hero">
-    <div class="hero-glow-a"></div>
-    <div class="hero-glow-b"></div>
-    <div class="hero-tag"><span class="hero-dot"></span> LIVE · AI-Powered Prediction Engine</div>
-    <h1>AUTO<span class="accent">PRICE</span><br>INTELLIGENCE</h1>
-    <p>Sistem prediksi harga kendaraan berbasis Machine Learning dengan metode CRISP-DM. Input spesifikasi, dapatkan estimasi harga instan.</p>
-    <div class="hero-kpi">
-        <div><div class="kpi-val">{R2*100:.1f}%</div><div class="kpi-lbl">Akurasi R²</div></div>
-        <div><div class="kpi-val">157</div><div class="kpi-lbl">Data Record</div></div>
-        <div><div class="kpi-val">7</div><div class="kpi-lbl">Fitur Input</div></div>
-        <div><div class="kpi-val">±${RMSE*1000:,.0f}</div><div class="kpi-lbl">Margin Error</div></div>
+<div class="hero-wrap">
+    <div class="hero-badge"><span class="live-dot"></span>LIVE · AI-Powered · CRISP-DM</div>
+    <div class="hero-title">AUTO<span class="fire">PRICE</span><br>INTELLIGENCE</div>
+    <div class="hero-desc">Sistem prediksi harga kendaraan berbasis Machine Learning. Input spesifikasi teknis, dapatkan estimasi harga pasar secara instan dan akurat.</div>
+    <div class="kpi-row">
+        <div class="kpi-item"><div class="val">{R2*100:.1f}%</div><div class="lbl">Akurasi R²</div></div>
+        <div class="kpi-item"><div class="val">157</div><div class="lbl">Data Record</div></div>
+        <div class="kpi-item"><div class="val">7</div><div class="lbl">Fitur Input</div></div>
+        <div class="kpi-item"><div class="val">±${RMSE*1000:,.0f}</div><div class="lbl">Margin Error</div></div>
     </div>
 </div>
 """, unsafe_allow_html=True)
 
-# ── COLUMNS
-col_l, col_r = st.columns([1, 1], gap="small")
+# ── MAIN LAYOUT ───────────────────────────────────────────────
+left, right = st.columns([1, 1], gap="large")
 
 CONF = {
-    "__year_resale_value": ("NILAI JUAL KEMBALI",  "Ribu USD"),
-    "Engine_size":         ("KAPASITAS MESIN",      "Liter"),
-    "Horsepower":          ("TENAGA MESIN",          "HP"),
-    "Curb_weight":         ("BERAT KENDARAAN",       "Ribu Lbs"),
-    "Wheelbase":           ("JARAK SUMBU RODA",      "Inch"),
-    "Fuel_capacity":       ("KAPASITAS TANGKI",      "Galon"),
-    "Power_perf_factor":   ("FAKTOR PERFORMA DAYA",  "—"),
+    "__year_resale_value": ("💲 NILAI JUAL KEMBALI",  "Ribu USD"),
+    "Engine_size":         ("⚙️ KAPASITAS MESIN",      "Liter"),
+    "Horsepower":          ("🔥 TENAGA MESIN",          "HP"),
+    "Curb_weight":         ("⚖️ BERAT KENDARAAN",       "Ribu Lbs"),
+    "Wheelbase":           ("📐 JARAK SUMBU RODA",      "Inch"),
+    "Fuel_capacity":       ("⛽ KAPASITAS TANGKI",      "Galon"),
+    "Power_perf_factor":   ("⚡ FAKTOR PERFORMA",       "—"),
 }
-ICONS = ["💲","⚙️","🔥","⚖️","📐","⛽","⚡"]
 
-with col_l:
+# ── LEFT: INPUT ───────────────────────────────────────────────
+with left:
     st.markdown("""
-    <div class="col-left">
-        <div class="section-tag">// Konfigurasi Kendaraan</div>
-        <div class="section-title">SPESIFIKASI<br>TEKNIS</div>
+    <div class="panel-head">
+        <div class="panel-tag">// Konfigurasi Kendaraan</div>
+        <div class="panel-title">SPESIFIKASI TEKNIS</div>
     </div>""", unsafe_allow_html=True)
 
     inputs = {}
-    for i, feat in enumerate(FEATURES):
+    for feat in FEATURES:
         name, unit = CONF[feat]
-        icon = ICONS[i]
         s = STATS[feat]
         step = 0.1 if s["max"] < 20 else (1.0 if s["max"] < 200 else 5.0)
+
         st.markdown(f"""
-        <div class="spec-card">
-            <div class="spec-top">
-                <span class="spec-name">{icon} &nbsp;{name}</span>
-                <span class="spec-badge">{unit}</span>
+        <div class="spec-wrap">
+            <div class="spec-label-row">
+                <span class="spec-name-txt">{name}</span>
+                <span class="spec-unit-txt">{unit}</span>
             </div>
         </div>""", unsafe_allow_html=True)
+
         inputs[feat] = st.slider(
-            feat, float(s["min"]), float(s["max"]),
-            float(s["median"]), step, label_visibility="collapsed"
+            feat,
+            min_value=float(s["min"]),
+            max_value=float(s["max"]),
+            value=float(s["median"]),
+            step=step,
+            label_visibility="collapsed"
         )
 
+    st.markdown("<br>", unsafe_allow_html=True)
     hitung = st.button("⚡  KALKULASI HARGA SEKARANG")
 
-with col_r:
+# ── RIGHT: OUTPUT ─────────────────────────────────────────────
+with right:
+    st.markdown("""
+    <div class="panel-head">
+        <div class="panel-tag">// Output Kalkulasi</div>
+        <div class="panel-title">ESTIMASI HARGA PASAR</div>
+    </div>""", unsafe_allow_html=True)
+
     if hitung:
         pred      = model.predict(pd.DataFrame([inputs]))[0]
         price_usd = pred * 1000
         price_idr = price_usd * 16000
-        lower     = (pred - RMSE) * 1000
+        lower     = max(0, (pred - RMSE) * 1000)
         upper     = (pred + RMSE) * 1000
-        fill      = int(R2 * 100)
+        fill_pct  = int(R2 * 100)
 
-        res_items = ""
-        for i, feat in enumerate(FEATURES):
-            name, unit = CONF[feat]
-            val = inputs[feat]
-            res_items += f"""
-            <div class="res-item">
-                <div class="res-lbl">{name}</div>
-                <div class="res-val">{val:.1f}<small>{unit}</small></div>
-            </div>"""
-
+        # Price card via markdown (safe, above column content)
         st.markdown(f"""
-        <div class="col-right">
-            <div class="section-tag">// Output Kalkulasi</div>
-            <div class="section-title">ESTIMASI<br>HARGA PASAR</div>
+        <div class="price-big-card">
+            <div class="pbc-label">// Perkiraan Harga Jual</div>
+            <div class="pbc-usd">${price_usd:,.0f}</div>
+            <div class="pbc-idr">≈ Rp {price_idr:,.0f} &nbsp;<span style="font-size:0.75rem">(kurs Rp 16.000)</span></div>
+            <div class="pbc-range">Rentang estimasi &nbsp;·&nbsp; <b>${lower:,.0f}</b> — <b>${upper:,.0f}</b></div>
+        </div>
+        """, unsafe_allow_html=True)
 
-            <div class="price-card">
-                <div class="pc-tag">// Harga Prediksi</div>
-                <div class="pc-price">${price_usd:,.0f}</div>
-                <div class="pc-idr">≈ Rp {price_idr:,.0f} <span style="font-size:0.75rem">(kurs Rp 16.000)</span></div>
-                <div class="pc-range">Rentang estimasi &nbsp;·&nbsp; <b>${lower:,.0f}</b> &nbsp;—&nbsp; <b>${upper:,.0f}</b></div>
+        # Accuracy bar
+        st.markdown(f"""
+        <div class="acc-card">
+            <div class="acc-row">
+                <span class="acc-label-txt">Akurasi Model (R² Score)</span>
+                <span class="acc-pct">{fill_pct}%</span>
             </div>
-
-            <div class="acc-wrap">
-                <div class="acc-top">
-                    <span class="acc-lbl">Akurasi Model (R² Score)</span>
-                    <span class="acc-val">{fill}%</span>
-                </div>
-                <div class="acc-bg"><div class="acc-fill" style="width:{fill}%"></div></div>
+            <div class="acc-track">
+                <div class="acc-bar" style="width:{fill_pct}%"></div>
             </div>
+        </div>
+        """, unsafe_allow_html=True)
 
-            <div class="res-grid">{res_items}</div>
+        # Spec grid — use native st.columns to avoid HTML rendering issues
+        st.markdown("**📋 Spesifikasi yang Diinput:**")
+        cols_a = st.columns(2)
+        cols_b = st.columns(2)
+        all_cols = list(cols_a) + list(cols_b)
 
-            <div class="credit">
-                <div class="cr-left">SISTEM INI<br>DIBUAT OLEH</div>
-                <div>
-                    <div class="cr-name">Alariq Aria Mustafa</div>
-                </div>
+        feat_pairs = [(f, CONF[f][0].split(" ", 1)[1], CONF[f][1], inputs[f]) for f in FEATURES]
+        # Fill 4 per row, 2 rows → 7 items across 4+3
+        col_idx = 0
+        for i, (feat, name, unit, val) in enumerate(feat_pairs):
+            row = i // 2
+            col = i % 2
+            target_cols = cols_a if row == 0 else cols_b if row == 1 else None
+
+            # Fallback: just use 4 columns cycling
+            c_idx = i % 4
+            if i < 4:
+                with cols_a[i % 2] if i < 2 else cols_b[i % 2 - (0 if i%2 else 0)]:
+                    pass
+
+        # Simpler: just iterate with columns(2)
+        feat_list = [(f, CONF[f][0].split(" ",1)[1], CONF[f][1], inputs[f]) for f in FEATURES]
+        for i in range(0, len(feat_list), 2):
+            c1, c2 = st.columns(2)
+            f1_name, f1_unit, f1_val = feat_list[i][1], feat_list[i][2], feat_list[i][3]
+            with c1:
+                st.markdown(f"""
+                <div class="res-card">
+                    <div class="res-card-lbl">{f1_name}</div>
+                    <div class="res-card-val">{f1_val:.1f}<small>{f1_unit}</small></div>
+                </div>""", unsafe_allow_html=True)
+            if i + 1 < len(feat_list):
+                f2_name, f2_unit, f2_val = feat_list[i+1][1], feat_list[i+1][2], feat_list[i+1][3]
+                with c2:
+                    st.markdown(f"""
+                    <div class="res-card">
+                        <div class="res-card-lbl">{f2_name}</div>
+                        <div class="res-card-val">{f2_val:.1f}<small>{f2_unit}</small></div>
+                    </div>""", unsafe_allow_html=True)
+
+        st.markdown("""
+        <div class="credit-card">
+            <div class="credit-label">SISTEM INI<br>DIBUAT OLEH</div>
+            <div>
+                <div class="credit-name">Alariq Aria Mustafa</div>
+                <div class="credit-nim">NIM · 237006166</div>
             </div>
         </div>""", unsafe_allow_html=True)
+
     else:
         st.markdown("""
-        <div class="col-right">
-            <div class="idle">
-                <div class="idle-ring">🏎️</div>
-                <div class="idle-title">SIAP KALKULASI</div>
-                <div class="idle-sub">Atur spesifikasi kendaraan di panel kiri<br>lalu tekan tombol kalkulasi</div>
-            </div>
-            <div class="credit">
-                <div class="cr-left">SISTEM INI<br>DIBUAT OLEH</div>
-                <div>
-                    <div class="cr-name">Alariq Aria Mustafa</div>
-                </div>
+        <div class="idle-container">
+            <div class="idle-ring">🏎️</div>
+            <div class="idle-title">SIAP KALKULASI</div>
+            <div class="idle-sub">Atur spesifikasi kendaraan<br>di panel kiri, lalu tekan<br>tombol kalkulasi</div>
+        </div>
+        <div class="credit-card">
+            <div class="credit-label">SISTEM INI<br>DIBUAT OLEH</div>
+            <div>
+                <div class="credit-name">Alariq Aria Mustafa</div>
+                <div class="credit-nim">NIM · 237006166</div>
             </div>
         </div>""", unsafe_allow_html=True)
